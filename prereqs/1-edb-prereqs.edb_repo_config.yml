@@ -2,7 +2,10 @@
 
 # Usage: ansible-playbook prereqs/1-edb-prereqs.edb_repo_configure.yml --extra-vars "host=edb-servers"
 
-- hosts: "{{ host }}"
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
   vars:
     yumusername:  "{{ lookup('env','EDBYUMUSERNAME') }}"
     yumpassword: "{{ lookup('env','EDBYUMPASSWORD') }}"

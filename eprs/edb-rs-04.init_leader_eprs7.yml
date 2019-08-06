@@ -1,11 +1,18 @@
 # Usage: ansible-playbook edb-rs-04.set_passwords_eprs7.yml --extra-vars "host=eprs1 rspwd=adm1n"
 
-- hosts: "{{ host }}"
+- hosts: leader
+  become: yes
+  become_user: root
+  become_method: sudo
   gather_facts: True
   vars:
         rspassword: "{{ rspwd }}"
 
   tasks:
+    - name: Install pip
+      yum:
+        name: python-pip
+        state: latest
 
     - name: Ensure pip is installed for module pre-requisites...
       easy_install:

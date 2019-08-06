@@ -1,10 +1,18 @@
 # Usage:  ansible-playbook edb-rs-02.config_eprs7.yml --extra-vars "host=eprs-servers"
 # Usage:  ansible-playbook edb-rs-02.config_eprs7.yml --extra-vars "host=eprs-servers rsdata=/opt/edb/rsdata"
 
-- hosts: "{{ host }}"
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
   gather_facts: True
 
   tasks:
+    - name: install firewalld
+      yum:
+        name: firewalld
+        state: present
+
     - name: Setup Environment variables for working with RS Command Line Tools
       blockinfile:
         create: yes

@@ -3,7 +3,10 @@
 # Works EPAS 10 and up
 
 
-- hosts: "{{ host }}"
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
   vars:
         asmajor: "{{ pgmajor | default(11) }}"
 

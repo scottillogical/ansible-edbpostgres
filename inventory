@@ -1,0 +1,11 @@
+192.168.51.68
+192.168.51.69
+192.168.51.70
+
+[leader]
+192.168.51.68
+
+[follower]
+192.168.51.69 rsjoiningname=follower1
+192.168.51.70 rsjoiningname=follower2
+

@@ -1,7 +1,9 @@
 # Usage:  ansible-playbook edb-rs.stop_eprs7.yml --extra-vars "host=eprs1"
 
-- hosts: "{{ host }}"
-
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
   tasks:
     - name: Starting EPRS7 as a system service
       systemd:

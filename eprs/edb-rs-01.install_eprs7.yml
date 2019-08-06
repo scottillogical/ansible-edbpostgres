@@ -1,6 +1,9 @@
 # Usage: ansible-playbook edb-rs-01.install_eprs7.yml --extra-vars "host=eprs-servers"
 
-- hosts: "{{ host }}"
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
   vars:
         asmajor: "{{ pgmajor | default(11) }}"
 

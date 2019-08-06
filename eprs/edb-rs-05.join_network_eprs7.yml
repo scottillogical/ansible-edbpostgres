@@ -5,12 +5,15 @@
 
 # host=${Ansible Host entry for leader node}
 
-- hosts: "{{ host }}"
+- hosts: leader
+  become: yes
+  become_user: root
+  become_method: sudo
   gather_facts: True
-  vars:
-        rsjoiningname: "{{ joiningname }}"
-        rsjoiningip: "{{ joiningip }}"
 
   tasks:
     - name: Join the EPRS Network
-      shell: /bin/bash -c "/usr/edb/rs-7.0/client/bin/runRepCLI.sh -joinnetwork -servername {{rsjoiningname}} -host {{ rsjoiningip }} -port 8082 -ngxpasspath /opt/edb/.ngxpass -user admin"
+      shell: /bin/bash -c "/usr/edb/rs-7.0/client/bin/runRepCLI.sh -joinnetwork -servername {{item.name}} -host {{ item.host }} -port 8082 -ngxpasspath /opt/edb/.ngxpass -user admin"
+      with_items:
+        - { host: "192.168.51.69", name: "follower1" }
+        - { host: "192.168.51.70", name: "follower2" }
