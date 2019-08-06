@@ -29,7 +29,7 @@ Playbook **1-edb-prereqs.edb_repo_config.yml** installs the `edb.repo` file onto
 In the example for **1-edb-prereqs.edb_repo_config.yml**, there is a global group edb-servers in our Ansible hosts file that will all have the EDB repo installed:
 
 ```
-ansible-playbook 1-edb-prereqs.edb_repo_config.yml --extra-vars "host=edb-servers"
+ansible-playbook -i inventory -u edb prereqs/1-edb-prereqs.edb_repo_config.yml
 ```
 
 ## Authors
