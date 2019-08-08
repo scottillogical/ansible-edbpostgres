@@ -40,7 +40,7 @@ ansible-playbook -i inventory -u edb eprs/edb-rs-03.start_eprs7.yml
 
 Note: This playbook should only be run on the leader node during initial deployment of this EPRS cluster.
 ```
-ansible-playbook -i inventory -u edb eprs/edb-rs-04.init_leader_eprs7.yml
+ansible-playbook -i inventory -u edb eprs/edb-rs-04.init_leader_eprs7.yml --extra-vars "rspwd=zipcar"
 ```
 
 **edb-rs-05.join_network_eprs7.yml** Add additional EPRS nodes to the EPRS cluster. This playbook should be run for each non leader node joining the EPRS cluster. The `repcli -joinnetwork` command requires a logical name for the node and the real IP on the joining node. These are passed in as variables `joiningname` and `joiningip`. 
